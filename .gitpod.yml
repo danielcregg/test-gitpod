@@ -1,7 +1,9 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - init: echo 'init script' # runs during prebuild
-    command: echo 'start script'
+    command: echo 'start script' \
+    && apt-get install -y openjfx libopenjfx-java matchbox \
+    && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
