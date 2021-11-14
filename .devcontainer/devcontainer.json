@@ -1,40 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.203.0/containers/java
 {
-	"name": "Code - OSS",
-
-	// Image contents: https://github.com/microsoft/vscode-dev-containers/blob/master/repository-containers/images/github.com/microsoft/vscode/.devcontainer/base.Dockerfile
-	"image": "mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:branch-main",
-	"overrideCommand": false,
-	"runArgs": [ "--init", "--security-opt", "seccomp=unconfined", "--shm-size=1g"],
-
-	"settings": {
-		"resmon.show.battery": false,
-		"resmon.show.cpufreq": false
+	"name": "Java",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update the VARIANT arg to pick a Java version: 11, 17
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use the -bullseye variants on local arm64/Apple Silicon.
+			"VARIANT": "11",
+			// Options
+			"INSTALL_MAVEN": "false",
+			"INSTALL_GRADLE": "false",
+			"NODE_VERSION": "none"
+		}
 	},
 
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"java.home": "/docker-java-home"
+	},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"vscjava.vscode-java-pack"
+	],
+
 	// noVNC, VNC
-	"forwardPorts": [6080, 5901],
+	"forwardPorts": [6080],
 	"portsAttributes": {
 		"6080": {
 			"label": "VNC web client (noVNC)",
 			"onAutoForward": "silent"
-		},
-		"5901": {
-			"label": "VNC TCP port",
-			"onAutoForward": "silent"
 		}
 	},
 
-	"extensions": [
-		"dbaeumer.vscode-eslint",
-		"mutantdino.resourcemonitor"
-	],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
 
-	// Optionally loads a cached yarn install for the repo
-	"postCreateCommand": ".devcontainer/cache/restore-diff.sh && sudo chown node:node /workspaces",
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
 
-	"remoteUser": "node",
-
-	"hostRequirements": {
-		"memory": "6gb"
-	}
 }
