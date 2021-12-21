@@ -26,6 +26,6 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 ARG JAVA_VERSION="17.0.0.fx-zulu"
 
 # Installing Java and Maven, removing some unnecessary SDKMAN files 
-RUN bash -c "yes | sdk install java $JAVA_VERSION && \
-    rm -rf $HOME/.sdkman/archives/* && \
-    rm -rf $HOME/.sdkman/tmp/*"
+#RUN bash -c "yes | sdk install java $JAVA_VERSION && \
+#    rm -rf $HOME/.sdkman/archives/* && \
+#    rm -rf $HOME/.sdkman/tmp/*"
